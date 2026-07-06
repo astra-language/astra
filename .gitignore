@@ -1,0 +1,86 @@
+# Compiled binaries
+astra
+astra.exe
+*.o
+*.obj
+astra_package/
+
+# Compiled power modules (build artifacts - source .cpp files are tracked)
+powers/*.power
+*.power
+
+# Compiled shared libraries (cross-platform)
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+
+# Debug symbols
+*.pdb
+*.ilk
+
+# Build directories
+build/
+dist/
+out/
+
+# Third-party dependencies (download separately - see README)
+curl/
+sqlite3.c
+sqlite3.h
+
+# Duplicate/old file kept locally only
+web_power.cpp
+
+# Old example folders (being replaced with a clean examples/ folder)
+# TODO: remove this line once a clean examples/ folder is ready to commit
+examples/
+newexamples/
+
+# Test/scratch files
+data.astra
+data1.astra
+memory.astra
+speed.astra
+utils.astra
+utils1.astra
+main.astra
+contact.html
+index.html
+school.db
+test.txt
+output.txt
+testfile.json
+errortest.txt
+plain.txt
+test_invalid.bin
+test_large.bin
+test_small.png
+curltest.cpp
+curltest.exe
+looptest.exe
+
+# Logo drafts (website assets, not part of source)
+*.bmp
+*.ico
+logo*.png
+
+
+# IDE / Editor configs
+.vscode/
+.vs/
+*.suo
+*.user
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary / backup files
+*.tmp
+*.bak
+*.log
+*~
+*.orig
+finaltest/
