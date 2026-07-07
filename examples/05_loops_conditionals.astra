@@ -1,0 +1,20 @@
+\\ Repeat loop
+repeat i to 5
+    write i
+;
+
+\\ If / else if / else
+score = 85
+if score >= 90
+    write "A Grade"
+else if score >= 80
+    write "B Grade"
+else
+    write "C Grade"
+;
+
+\\ Bare-value conditions (no comparison needed)
+flag = 1
+if flag
+    write "flag is truthy!"
+;

@@ -1,0 +1,9 @@
+add net
+
+\\ Fetch a URL's content
+result = get("https://httpbin.org/get")
+write result
+
+\\ Check a website's status code
+code = status("https://www.google.com")
+write code

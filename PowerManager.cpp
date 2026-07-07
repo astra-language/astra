@@ -11,19 +11,43 @@
 #include "common.h"
 #include <iostream>
 #include <set>
-
+#include <string>
 
 #ifdef _WIN32
     #define WIN32_LEAN_AND_MEAN
-    #ifndef NOMINMAX        
+    #ifndef NOMINMAX
         #define NOMINMAX
     #endif
     #include <windows.h>
 #else
     #include <dlfcn.h>
+    #include <unistd.h>
+    #include <limits.h>
 #endif
 
 static std::set<std::string> loadedModules;
+
+// ── executable ఎక్కడ ఉందో తెలుసుకోవడం — cwd మీద ఆధారపడకుండా ──────────────
+// idi lేకపోతే, user ఎక్కడి నుంచైనా (PATH ద్వారా) 'astra' run చేస్తే,
+// './powers/xyz.power' అనేది wrong directory లో వెతికి fail అవుతుంది.
+static std::string getExecutableDir() {
+#ifdef _WIN32
+    char buffer[MAX_PATH];
+    DWORD len = GetModuleFileNameA(NULL, buffer, MAX_PATH);
+    if (len == 0 || len == MAX_PATH) return "";
+    std::string fullPath(buffer, len);
+    size_t pos = fullPath.find_last_of("\\/");
+    return (pos == std::string::npos) ? "" : fullPath.substr(0, pos);
+#else
+    char buffer[PATH_MAX];
+    ssize_t len = readlink("/proc/self/exe", buffer, sizeof(buffer) - 1);
+    if (len == -1) return "";
+    buffer[len] = '\0';
+    std::string fullPath(buffer);
+    size_t pos = fullPath.find_last_of('/');
+    return (pos == std::string::npos) ? "" : fullPath.substr(0, pos);
+#endif
+}
 
 static void chainStoreWrapper(void* vm,
                                const std::string& name,
@@ -41,7 +65,22 @@ void PowerManager::load(const std::string& fileName) {
         return;
     }
 
-    std::string path = "powers/" + fileName + ".power";
+#ifdef _WIN32
+    const char* SEP = "\\";
+    const char* EXT = ".power";
+#else
+    const char* SEP = "/";
+    const char* EXT = ".power";
+#endif
+
+    std::string exeDir = getExecutableDir();
+    std::string path;
+    if (!exeDir.empty()) {
+        path = exeDir + SEP + "powers" + SEP + fileName + EXT;
+    } else {
+        // fallback — exe path తెలియకపోతే, cwd-relative గా try చేద్దాం (పాత behavior)
+        path = "powers/" + fileName + ".power";
+    }
 
 #ifdef _WIN32
     HMODULE hLib = LoadLibraryA(path.c_str());
@@ -51,7 +90,7 @@ void PowerManager::load(const std::string& fileName) {
 
     if (!hLib) {
         AstraError::runtime(ErrCode::INVALID_OPERATION, 0,
-            "Astra Power Check :: '" + fileName + ".power' Not Found or Failed to load");
+            "Astra Power Check :: '" + fileName + ".power' Not Found or Failed to load (looked in: " + path + ")");
         return;
     }
 
@@ -65,7 +104,7 @@ void PowerManager::load(const std::string& fileName) {
         init([](const char* name, void(*func)(AstraVM*)) {
             PowerManager::getInstance().registerFunction(name, func);
         });
-         
+
         #ifdef _WIN32
     auto setChain = (void(*)(ChainStoreFn))GetProcAddress(hLib, "astra_set_chain");
 #else
@@ -81,7 +120,7 @@ void PowerManager::load(const std::string& fileName) {
     if (setError) setError(&AstraError::runtime);
 
         loadedModules.insert(fileName);
-        handles[fileName] = (LibHandle)hLib;  
+        handles[fileName] = (LibHandle)hLib;
 
         std::cerr << MAGENTA << "[ASTRA-INFO]" << RESET
                   << " :: " << YELLOW << " Astra Power Check" << RESET

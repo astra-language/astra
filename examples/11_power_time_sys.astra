@@ -1,0 +1,8 @@
+add time
+add sys
+
+write time()
+write date()
+
+write cwd()
+write os()

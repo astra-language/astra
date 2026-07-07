@@ -1,0 +1,10 @@
+\\ attach: module-style import (like Python's import)
+\\ Functions are namespaced, top-level code does NOT execute
+\\ attach "utils.astra" as u
+\\ u.someFunction()
+
+\\ include: full merge (like C's #include)
+\\ Executes everything in the included file, exactly where placed
+\\ include "config.astra"
+
+write "See README.md for attach vs include details"

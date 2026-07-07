@@ -1,0 +1,10 @@
+add math
+
+\\ when/then catches runtime errors safely
+when:
+    write sqrt(-4)
+then MATH_DOMAIN_ERROR:
+    write "Caught invalid sqrt input!"
+;
+
+write "Program continues normally after error handling"

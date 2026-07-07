@@ -1,0 +1,12 @@
+add text
+
+write upper("astra")
+write lower("ASTRA")
+write trim("  hello  ")
+write replace("hello world", "world", "astra")
+write slen("hello")
+
+parts:n = split("apple,banana,cherry", ",")
+write parts1
+write parts2
+write parts3

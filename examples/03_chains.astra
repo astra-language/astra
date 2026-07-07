@@ -1,0 +1,14 @@
+\\ Chains: array-style
+nums:n = 10, 20, 30
+write nums:n
+write nums1
+
+\\ Chains: struct-style (same concept!)
+person:n(name, age) = ("Alice", 30)
+write person1:name
+write person1:age
+
+\\ Nested chains
+people:n(name, adr(city, code)) = ("Ravi", ("Hyderabad", "500001"))
+write people1:name
+write people1:adr:city

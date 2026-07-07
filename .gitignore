@@ -35,7 +35,6 @@ web_power.cpp
 
 # Old example folders (being replaced with a clean examples/ folder)
 # TODO: remove this line once a clean examples/ folder is ready to commit
-examples/
 newexamples/
 
 # Test/scratch files

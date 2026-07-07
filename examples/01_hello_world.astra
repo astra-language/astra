@@ -1,0 +1,13 @@
+\\ Your first Astra program
+write "Hello, World!"
+
+\\ Variables
+name = "Astra"
+version = 1.0
+write "Welcome to " + name
+
+\\ Basic arithmetic
+x = 10
+y = 3
+write x + y
+write x / y     \\ Division by zero returns INFINITE, never crashes

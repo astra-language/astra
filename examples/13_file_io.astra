@@ -1,0 +1,12 @@
+f = create("sample.txt")
+clear(f)
+plus(f, "Hello from Astra!", "la")
+plus(f, "Second line", "la")
+close(f)
+
+f2 = create("sample.txt")
+repeat (eof(f2) == false)
+    line = read(f2, "l")
+    write line
+;
+close(f2)

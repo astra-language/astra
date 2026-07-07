@@ -1,0 +1,17 @@
+\\ Variable types
+age = 25
+price = 19.99
+name = "Astra"
+
+\\ Tri-state boolean - unique to Astra!
+a = true
+b = false
+c = maybe
+
+write a
+write b
+write c
+
+\\ Constants
+const PI = 3.14159
+write PI

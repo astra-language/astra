@@ -1,0 +1,13 @@
+\\ Parse JSON into a chain
+parseJson("data", "{\"name\":\"Astra\",\"version\":1}")
+write data1:name
+write data1:version
+
+\\ Convert a chain back to JSON
+p:n(name, age) = ("Bob", 25)
+json = toJson(p:n)
+write json
+
+\\ Pretty-print JSON with indentation
+pretty = jsonpretty("[{\"a\":1},{\"b\":2}]")
+write pretty

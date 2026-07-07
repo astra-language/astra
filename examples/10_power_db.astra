@@ -1,0 +1,12 @@
+add db
+
+open("mydata.db")
+drop("users")
+query("CREATE TABLE IF NOT EXISTS users (id INT, name TEXT)")
+query("INSERT INTO users VALUES (1, 'Astra')")
+
+exists("users")
+write "Row count:"
+write count("users")
+
+close()

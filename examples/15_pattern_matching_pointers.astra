@@ -1,0 +1,12 @@
+\\ check/end - clean switch-like pattern matching
+grade = "B"
+check grade
+    "A" : write "Excellent!"
+    "B" : write "Good job!"
+    "C" : write "Keep trying!"
+end
+
+\\ Pointers - adr/val for low-level memory access
+x = 10
+p = adr(x)
+write val(p)

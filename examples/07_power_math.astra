@@ -1,0 +1,9 @@
+add math
+
+write sqrt(16)
+write pow(2, 10)
+write fib(10)
+write fact(5)
+write gcd(12, 18)
+write rand(1, 10)
+write pi()

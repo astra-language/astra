@@ -1,0 +1,16 @@
+\\ Function definition
+#f greet(name)
+    write "Hello, " + name + "!"
+#ef
+
+greet("Astra")
+
+\\ Recursion - Fibonacci
+#f fib(n)
+    if n <= 1
+        return n
+    ;
+    return fib(n-1) + fib(n-2)
+#ef
+
+write fib(10)   \\ 55
