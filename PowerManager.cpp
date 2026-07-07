@@ -27,9 +27,7 @@
 
 static std::set<std::string> loadedModules;
 
-// ── executable ఎక్కడ ఉందో తెలుసుకోవడం — cwd మీద ఆధారపడకుండా ──────────────
-// idi lేకపోతే, user ఎక్కడి నుంచైనా (PATH ద్వారా) 'astra' run చేస్తే,
-// './powers/xyz.power' అనేది wrong directory లో వెతికి fail అవుతుంది.
+
 static std::string getExecutableDir() {
 #ifdef _WIN32
     char buffer[MAX_PATH];
@@ -78,7 +76,7 @@ void PowerManager::load(const std::string& fileName) {
     if (!exeDir.empty()) {
         path = exeDir + SEP + "powers" + SEP + fileName + EXT;
     } else {
-        // fallback — exe path తెలియకపోతే, cwd-relative గా try చేద్దాం (పాత behavior)
+        
         path = "powers/" + fileName + ".power";
     }
 
